@@ -1,0 +1,708 @@
+---
+import Layout from '../components/Layout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import ProgressBar from '../components/ProgressBar.astro';
+import OSTabs from '../components/OSTabs.astro';
+import StepCard from '../components/StepCard.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+import Celebration from '../components/Celebration.astro';
+import AdUnit from '../components/AdUnit.astro';
+import LangSwitcher from '../components/LangSwitcher.astro';
+import '../styles/global.css';
+
+// Default steps used for sidebar — JS updates labels on lang switch
+const steps = [
+  { id: 0, title: 'Prerequisitos', icon: '✅' },
+  { id: 1, title: 'Instalar Claude Code', icon: '📦' },
+  { id: 2, title: 'Configurar PATH', icon: '🔧' },
+  { id: 3, title: 'API Key', icon: '🔑' },
+  { id: 4, title: 'Primera verificación', icon: '🚀' },
+  { id: 5, title: 'Configuración esencial', icon: '⚙️' },
+  { id: 6, title: 'Shortcuts & Tips', icon: '💡' },
+  { id: 7, title: '¡Completado!', icon: '🎉' },
+];
+---
+
+<Layout>
+  <div class="app-layout">
+    <Sidebar steps={steps} />
+
+    <main class="main-content">
+      <ProgressBar total={steps.length} />
+
+      <header class="page-header">
+        <div class="page-header-top">
+          <h1 data-i18n="headerTitle">Claude Code — Guía de instalación</h1>
+          <div class="page-header-lang-mobile">
+            <LangSwitcher />
+          </div>
+        </div>
+        <p data-i18n="headerSubtitle">
+          Seguí este paso a paso para instalar, configurar y empezar a usar Claude Code,
+          la CLI oficial de Anthropic para trabajar con IA desde tu terminal.
+        </p>
+      </header>
+
+      <OSTabs />
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 0: PREREQUISITES                                           -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={0} title="Prerequisitos" icon="✅">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>Claude Code requiere <strong>Node.js versión 18 o superior</strong>. Verificá tu versión actual:</p>
+          <CodeBlock code="node --version" lang="bash" />
+          <p>Si el comando falla o la versión es menor a 18, instalá Node.js según tu sistema:</p>
+          <h3>Instalar Node.js</h3>
+          <div class="os-content" data-os="windows">
+            <p>Opción 1 — Usando <strong>winget</strong>:</p>
+            <CodeBlock code="winget install OpenJS.NodeJS.LTS" lang="powershell" os="windows" label="PowerShell" />
+            <p>Opción 2 — Descargá el instalador desde <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> y ejecutá el archivo <code>.msi</code>.</p>
+            <div class="info-box"><span>💡</span><span>Durante la instalación marcá la opción <strong>"Add to PATH"</strong>.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <p>Con <strong>Homebrew</strong> (recomendado):</p>
+            <CodeBlock code="brew install node" lang="bash" os="macos" />
+            <p>O con <strong>nvm</strong>:</p>
+            <CodeBlock code={`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\nnvm install --lts`} lang="bash" os="macos" label="nvm" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <p>Con <strong>nvm</strong> (recomendado):</p>
+            <CodeBlock code={`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\nsource ~/.bashrc\nnvm install --lts`} lang="bash" os="linux" label="nvm" />
+            <p>O con apt (Ubuntu/Debian):</p>
+            <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -\nsudo apt-get install -y nodejs`} lang="bash" os="linux" label="apt" />
+          </div>
+          <h3>Verificar instalación</h3>
+          <CodeBlock code={`node --version\nnpm --version`} lang="bash" />
+          <div class="success-box"><span>✓</span><span>Si ambos devuelven un número de versión, Node.js está listo.</span></div>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>Claude Code requires <strong>Node.js version 18 or higher</strong>. Check your current version:</p>
+          <CodeBlock code="node --version" lang="bash" />
+          <p>If the command fails or the version is below 18, install Node.js for your OS:</p>
+          <h3>Install Node.js</h3>
+          <div class="os-content" data-os="windows">
+            <p>Option 1 — Using <strong>winget</strong>:</p>
+            <CodeBlock code="winget install OpenJS.NodeJS.LTS" lang="powershell" os="windows" label="PowerShell" />
+            <p>Option 2 — Download the installer from <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> and run the <code>.msi</code> file.</p>
+            <div class="info-box"><span>💡</span><span>During install, check <strong>"Add to PATH"</strong>.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <p>With <strong>Homebrew</strong> (recommended):</p>
+            <CodeBlock code="brew install node" lang="bash" os="macos" />
+            <p>Or with <strong>nvm</strong>:</p>
+            <CodeBlock code={`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\nnvm install --lts`} lang="bash" os="macos" label="nvm" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <p>With <strong>nvm</strong> (recommended):</p>
+            <CodeBlock code={`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\nsource ~/.bashrc\nnvm install --lts`} lang="bash" os="linux" label="nvm" />
+            <p>Or with apt (Ubuntu/Debian):</p>
+            <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -\nsudo apt-get install -y nodejs`} lang="bash" os="linux" label="apt" />
+          </div>
+          <h3>Verify installation</h3>
+          <CodeBlock code={`node --version\nnpm --version`} lang="bash" />
+          <div class="success-box"><span>✓</span><span>If both commands return a version number, Node.js is ready.</span></div>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>O Claude Code requer <strong>Node.js versão 18 ou superior</strong>. Verifique sua versão atual:</p>
+          <CodeBlock code="node --version" lang="bash" />
+          <p>Se o comando falhar ou a versão for menor que 18, instale o Node.js:</p>
+          <h3>Instalar Node.js</h3>
+          <div class="os-content" data-os="windows">
+            <p>Opção 1 — Usando <strong>winget</strong>:</p>
+            <CodeBlock code="winget install OpenJS.NodeJS.LTS" lang="powershell" os="windows" label="PowerShell" />
+            <p>Opção 2 — Baixe o instalador em <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> e execute o arquivo <code>.msi</code>.</p>
+            <div class="info-box"><span>💡</span><span>Durante a instalação, marque <strong>"Add to PATH"</strong>.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <p>Com <strong>Homebrew</strong> (recomendado):</p>
+            <CodeBlock code="brew install node" lang="bash" os="macos" />
+            <p>Ou com <strong>nvm</strong>:</p>
+            <CodeBlock code={`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\nnvm install --lts`} lang="bash" os="macos" label="nvm" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <p>Com <strong>nvm</strong> (recomendado):</p>
+            <CodeBlock code={`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash\nsource ~/.bashrc\nnvm install --lts`} lang="bash" os="linux" label="nvm" />
+            <p>Ou com apt (Ubuntu/Debian):</p>
+            <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -\nsudo apt-get install -y nodejs`} lang="bash" os="linux" label="apt" />
+          </div>
+          <h3>Verificar instalação</h3>
+          <CodeBlock code={`node --version\nnpm --version`} lang="bash" />
+          <div class="success-box"><span>✓</span><span>Se ambos retornarem um número de versão, o Node.js está pronto.</span></div>
+        </div>
+      </StepCard>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 1: INSTALL CLAUDE CODE                                     -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={1} title="Instalar Claude Code" icon="📦">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <div class="os-content" data-os="windows">
+            <p>En Windows, usá el <strong>instalador oficial</strong>. Abrí <strong>PowerShell</strong> y ejecutá:</p>
+            <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — instalador oficial" />
+            <div class="info-box"><span>💡</span><span>El script instala <code>claude.exe</code> en <code>$HOME\.local\bin\</code> y actualiza el PATH automáticamente.</span></div>
+            <p>Alternativa — via npm (requiere Node.js ≥18):</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="powershell" os="windows" label="PowerShell — npm" />
+          </div>
+          <div class="os-content" data-os="macos">
+            <p>Instalá globalmente via <strong>npm</strong>:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" />
+            <div class="warning-box"><span>⚠️</span><span>Si recibís error de permisos, <strong>no uses sudo</strong>. Usá nvm o corregí los permisos de npm.</span></div>
+          </div>
+          <div class="os-content" data-os="linux">
+            <p>Instalá globalmente via <strong>npm</strong>:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" />
+            <div class="warning-box"><span>⚠️</span><span>Si recibís error de permisos, <strong>no uses sudo</strong>. Usá nvm o configurá npm para instalar en tu home.</span></div>
+          </div>
+          <div class="info-box"><span>⏳</span><span>La instalación puede tardar unos segundos.</span></div>
+          <h3>Verificar instalación</h3>
+          <CodeBlock code="claude --version" lang="bash" />
+          <p>Deberías ver algo como <code>claude/1.x.x</code>.</p>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <div class="os-content" data-os="windows">
+            <p>On Windows, use the <strong>official installer</strong>. Open <strong>PowerShell</strong> and run:</p>
+            <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — official installer" />
+            <div class="info-box"><span>💡</span><span>The script installs <code>claude.exe</code> in <code>$HOME\.local\bin\</code> and updates PATH automatically.</span></div>
+            <p>Alternative — via npm (requires Node.js ≥18):</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="powershell" os="windows" label="PowerShell — npm" />
+          </div>
+          <div class="os-content" data-os="macos">
+            <p>Install globally via <strong>npm</strong>:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" />
+            <div class="warning-box"><span>⚠️</span><span>If you get a permissions error, <strong>don't use sudo</strong>. Use nvm or fix npm permissions.</span></div>
+          </div>
+          <div class="os-content" data-os="linux">
+            <p>Install globally via <strong>npm</strong>:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" />
+            <div class="warning-box"><span>⚠️</span><span>If you get a permissions error, <strong>don't use sudo</strong>. Use nvm or configure npm to install in your home directory.</span></div>
+          </div>
+          <div class="info-box"><span>⏳</span><span>Installation may take a few seconds.</span></div>
+          <h3>Verify installation</h3>
+          <CodeBlock code="claude --version" lang="bash" />
+          <p>You should see something like <code>claude/1.x.x</code>.</p>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <div class="os-content" data-os="windows">
+            <p>No Windows, use o <strong>instalador oficial</strong>. Abra o <strong>PowerShell</strong> e execute:</p>
+            <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — instalador oficial" />
+            <div class="info-box"><span>💡</span><span>O script instala <code>claude.exe</code> em <code>$HOME\.local\bin\</code> e atualiza o PATH automaticamente.</span></div>
+            <p>Alternativa — via npm (requer Node.js ≥18):</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="powershell" os="windows" label="PowerShell — npm" />
+          </div>
+          <div class="os-content" data-os="macos">
+            <p>Instale globalmente via <strong>npm</strong>:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" />
+            <div class="warning-box"><span>⚠️</span><span>Se receber erro de permissão, <strong>não use sudo</strong>. Use nvm ou corrija as permissões do npm.</span></div>
+          </div>
+          <div class="os-content" data-os="linux">
+            <p>Instale globalmente via <strong>npm</strong>:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" />
+            <div class="warning-box"><span>⚠️</span><span>Se receber erro de permissão, <strong>não use sudo</strong>. Use nvm ou configure o npm para instalar no seu diretório home.</span></div>
+          </div>
+          <div class="info-box"><span>⏳</span><span>A instalação pode levar alguns segundos.</span></div>
+          <h3>Verificar instalação</h3>
+          <CodeBlock code="claude --version" lang="bash" />
+          <p>Você deve ver algo como <code>claude/1.x.x</code>.</p>
+        </div>
+      </StepCard>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 2: PATH CONFIGURATION                                      -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={2} title="Configurar PATH" icon="🔧">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>Para que el comando <code>claude</code> esté disponible en cualquier terminal, el directorio del binario debe estar en tu <strong>PATH</strong>.</p>
+          <div class="os-content" data-os="windows">
+            <h3>Si usaste el instalador oficial</h3>
+            <p>El instalador actualiza el PATH automáticamente. Verificá abriendo una <strong>nueva terminal</strong>:</p>
+            <CodeBlock code="claude --version" lang="powershell" os="windows" />
+            <p>Si no funciona, agregá manualmente <code>%USERPROFILE%\.local\bin</code> al PATH:</p>
+            <h3>Opción 1 — PowerShell</h3>
+            <CodeBlock code={`$path = "$env:USERPROFILE\\.local\\bin"\n[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$path", [EnvironmentVariableTarget]::User)\nWrite-Host "PATH actualizado. Reiniciá la terminal."`} lang="powershell" os="windows" label="PowerShell" />
+            <h3>Opción 2 — GUI del sistema</h3>
+            <ol style="padding-left: 1.25rem; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
+              <li>Presioná <kbd>Win + R</kbd>, escribí <code>sysdm.cpl</code> y Enter.</li>
+              <li><strong>Opciones avanzadas</strong> → <strong>Variables de entorno</strong>.</li>
+              <li>En <strong>Variables de usuario</strong> → <strong>Path</strong> → doble clic.</li>
+              <li>Clic en <strong>Nuevo</strong> → pegá <code>%USERPROFILE%\.local\bin</code>.</li>
+              <li>Aceptar y reiniciar la terminal.</li>
+            </ol>
+            <div class="warning-box"><span>⚠️</span><span>Reiniciá la terminal para que los cambios tengan efecto.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <h3>Agregar al shell profile</h3>
+            <p>Para <strong>Zsh</strong> (shell por defecto en macOS moderno):</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="macos" label="zsh" />
+            <p>Para <strong>Bash</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.bash_profile\nsource ~/.bash_profile`} lang="bash" os="macos" label="bash" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <h3>Agregar al shell profile</h3>
+            <p>Para <strong>Bash</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.bashrc\nsource ~/.bashrc`} lang="bash" os="linux" label="bash" />
+            <p>Para <strong>Zsh</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="linux" label="zsh" />
+          </div>
+          <div class="success-box"><span>✓</span><span>Si <code>claude --version</code> responde correctamente, el PATH está listo.</span></div>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>For the <code>claude</code> command to work in any terminal, its directory must be in your <strong>PATH</strong>.</p>
+          <div class="os-content" data-os="windows">
+            <h3>If you used the official installer</h3>
+            <p>The installer updates PATH automatically. Verify by opening a <strong>new terminal</strong>:</p>
+            <CodeBlock code="claude --version" lang="powershell" os="windows" />
+            <p>If it fails, manually add <code>%USERPROFILE%\.local\bin</code> to PATH:</p>
+            <h3>Option 1 — PowerShell</h3>
+            <CodeBlock code={`$path = "$env:USERPROFILE\\.local\\bin"\n[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$path", [EnvironmentVariableTarget]::User)\nWrite-Host "PATH updated. Restart your terminal."`} lang="powershell" os="windows" label="PowerShell" />
+            <h3>Option 2 — System GUI</h3>
+            <ol style="padding-left: 1.25rem; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
+              <li>Press <kbd>Win + R</kbd>, type <code>sysdm.cpl</code>, press Enter.</li>
+              <li><strong>Advanced</strong> → <strong>Environment Variables</strong>.</li>
+              <li>Under <strong>User variables</strong> → <strong>Path</strong> → double click.</li>
+              <li>Click <strong>New</strong> → paste <code>%USERPROFILE%\.local\bin</code>.</li>
+              <li>Accept and restart your terminal.</li>
+            </ol>
+            <div class="warning-box"><span>⚠️</span><span>Restart your terminal for changes to take effect.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <h3>Add to shell profile</h3>
+            <p>For <strong>Zsh</strong> (macOS default):</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="macos" label="zsh" />
+            <p>For <strong>Bash</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.bash_profile\nsource ~/.bash_profile`} lang="bash" os="macos" label="bash" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <h3>Add to shell profile</h3>
+            <p>For <strong>Bash</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.bashrc\nsource ~/.bashrc`} lang="bash" os="linux" label="bash" />
+            <p>For <strong>Zsh</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="linux" label="zsh" />
+          </div>
+          <div class="success-box"><span>✓</span><span>If <code>claude --version</code> responds correctly, your PATH is configured.</span></div>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>Para que o comando <code>claude</code> funcione em qualquer terminal, o diretório do binário deve estar no seu <strong>PATH</strong>.</p>
+          <div class="os-content" data-os="windows">
+            <h3>Se usou o instalador oficial</h3>
+            <p>O instalador atualiza o PATH automaticamente. Verifique abrindo um <strong>novo terminal</strong>:</p>
+            <CodeBlock code="claude --version" lang="powershell" os="windows" />
+            <p>Se falhar, adicione manualmente <code>%USERPROFILE%\.local\bin</code> ao PATH:</p>
+            <h3>Opção 1 — PowerShell</h3>
+            <CodeBlock code={`$path = "$env:USERPROFILE\\.local\\bin"\n[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$path", [EnvironmentVariableTarget]::User)\nWrite-Host "PATH atualizado. Reinicie o terminal."`} lang="powershell" os="windows" label="PowerShell" />
+            <h3>Opção 2 — GUI do sistema</h3>
+            <ol style="padding-left: 1.25rem; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
+              <li>Pressione <kbd>Win + R</kbd>, digite <code>sysdm.cpl</code> e Enter.</li>
+              <li><strong>Avançado</strong> → <strong>Variáveis de Ambiente</strong>.</li>
+              <li>Em <strong>Variáveis do usuário</strong> → <strong>Path</strong> → duplo clique.</li>
+              <li>Clique em <strong>Novo</strong> → cole <code>%USERPROFILE%\.local\bin</code>.</li>
+              <li>Confirmar e reiniciar o terminal.</li>
+            </ol>
+            <div class="warning-box"><span>⚠️</span><span>Reinicie o terminal para que as mudanças tenham efeito.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <h3>Adicionar ao shell profile</h3>
+            <p>Para <strong>Zsh</strong> (padrão no macOS moderno):</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="macos" label="zsh" />
+            <p>Para <strong>Bash</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.bash_profile\nsource ~/.bash_profile`} lang="bash" os="macos" label="bash" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <h3>Adicionar ao shell profile</h3>
+            <p>Para <strong>Bash</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.bashrc\nsource ~/.bashrc`} lang="bash" os="linux" label="bash" />
+            <p>Para <strong>Zsh</strong>:</p>
+            <CodeBlock code={`echo 'export PATH="$(npm config get prefix)/bin:$PATH"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="linux" label="zsh" />
+          </div>
+          <div class="success-box"><span>✓</span><span>Se <code>claude --version</code> responder corretamente, o PATH está configurado.</span></div>
+        </div>
+      </StepCard>
+
+      <!-- AD UNIT 1 -->
+      <AdUnit slot="1234567890" />
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 3: API KEY                                                 -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={3} title="API Key" icon="🔑">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>Claude Code necesita una <strong>API key de Anthropic</strong> para autenticarse.</p>
+          <h3>Obtener tu API Key</h3>
+          <ol style="padding-left: 1.25rem; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
+            <li>Ingresá a <a href="https://console.anthropic.com" target="_blank" rel="noopener"><strong>console.anthropic.com</strong></a></li>
+            <li>Creá una cuenta o iniciá sesión.</li>
+            <li><strong>API Keys</strong> → <strong>Create Key</strong>.</li>
+            <li>Copiá la key (empieza con <code>sk-ant-</code>).</li>
+          </ol>
+          <div class="warning-box"><span>🔒</span><span><strong>Nunca commits tu API key</strong> a un repositorio Git. Anthropic la revocará si la detecta en repos públicos.</span></div>
+          <h3>Configurar la variable de entorno</h3>
+          <div class="os-content" data-os="windows">
+            <CodeBlock code={`setx ANTHROPIC_API_KEY "sk-ant-tu-api-key-aqui"`} lang="powershell" os="windows" label="PowerShell" />
+            <div class="info-box"><span>💡</span><span><code>setx</code> guarda la variable permanentemente. Reiniciá la terminal para que tome efecto.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <CodeBlock code={`echo 'export ANTHROPIC_API_KEY="sk-ant-tu-api-key"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="macos" label="zsh" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <CodeBlock code={`echo 'export ANTHROPIC_API_KEY="sk-ant-tu-api-key"' >> ~/.bashrc\nsource ~/.bashrc`} lang="bash" os="linux" label="bash" />
+          </div>
+          <h3>Alternativa: configurar en el primer arranque</h3>
+          <p>Al ejecutar <code>claude</code> por primera vez, el asistente te guía para ingresar la API key interactivamente.</p>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>Claude Code needs an <strong>Anthropic API key</strong> to authenticate.</p>
+          <h3>Get your API Key</h3>
+          <ol style="padding-left: 1.25rem; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
+            <li>Go to <a href="https://console.anthropic.com" target="_blank" rel="noopener"><strong>console.anthropic.com</strong></a></li>
+            <li>Create an account or sign in.</li>
+            <li><strong>API Keys</strong> → <strong>Create Key</strong>.</li>
+            <li>Copy the key (starts with <code>sk-ant-</code>).</li>
+          </ol>
+          <div class="warning-box"><span>🔒</span><span><strong>Never commit your API key</strong> to a Git repository. Anthropic will revoke it if detected in public repos.</span></div>
+          <h3>Set the environment variable</h3>
+          <div class="os-content" data-os="windows">
+            <CodeBlock code={`setx ANTHROPIC_API_KEY "sk-ant-your-api-key-here"`} lang="powershell" os="windows" label="PowerShell" />
+            <div class="info-box"><span>💡</span><span><code>setx</code> saves the variable permanently. Restart your terminal for it to take effect.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <CodeBlock code={`echo 'export ANTHROPIC_API_KEY="sk-ant-your-api-key"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="macos" label="zsh" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <CodeBlock code={`echo 'export ANTHROPIC_API_KEY="sk-ant-your-api-key"' >> ~/.bashrc\nsource ~/.bashrc`} lang="bash" os="linux" label="bash" />
+          </div>
+          <h3>Alternative: configure on first launch</h3>
+          <p>When you run <code>claude</code> for the first time, the assistant guides you to enter the API key interactively.</p>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>O Claude Code precisa de uma <strong>API key da Anthropic</strong> para autenticar.</p>
+          <h3>Obter sua API Key</h3>
+          <ol style="padding-left: 1.25rem; color: var(--muted); line-height: 1.8; font-size: 0.9rem;">
+            <li>Acesse <a href="https://console.anthropic.com" target="_blank" rel="noopener"><strong>console.anthropic.com</strong></a></li>
+            <li>Crie uma conta ou faça login.</li>
+            <li><strong>API Keys</strong> → <strong>Create Key</strong>.</li>
+            <li>Copie a key (começa com <code>sk-ant-</code>).</li>
+          </ol>
+          <div class="warning-box"><span>🔒</span><span><strong>Nunca faça commit da sua API key</strong> em um repositório Git. A Anthropic vai revogá-la se detectada em repos públicos.</span></div>
+          <h3>Configurar a variável de ambiente</h3>
+          <div class="os-content" data-os="windows">
+            <CodeBlock code={`setx ANTHROPIC_API_KEY "sk-ant-sua-api-key-aqui"`} lang="powershell" os="windows" label="PowerShell" />
+            <div class="info-box"><span>💡</span><span><code>setx</code> salva a variável permanentemente. Reinicie o terminal para que tenha efeito.</span></div>
+          </div>
+          <div class="os-content" data-os="macos">
+            <CodeBlock code={`echo 'export ANTHROPIC_API_KEY="sk-ant-sua-api-key"' >> ~/.zshrc\nsource ~/.zshrc`} lang="bash" os="macos" label="zsh" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <CodeBlock code={`echo 'export ANTHROPIC_API_KEY="sk-ant-sua-api-key"' >> ~/.bashrc\nsource ~/.bashrc`} lang="bash" os="linux" label="bash" />
+          </div>
+          <h3>Alternativa: configurar na primeira execução</h3>
+          <p>Ao executar <code>claude</code> pela primeira vez, o assistente vai guiá-lo para inserir a API key de forma interativa.</p>
+        </div>
+      </StepCard>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 4: FIRST RUN                                               -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={4} title="Primera verificación" icon="🚀">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>¡Todo listo! Ejecutá Claude Code por primera vez y respondé la configuración inicial.</p>
+          <h3>Abrir el REPL interactivo</h3>
+          <CodeBlock code="claude" lang="bash" />
+          <h3>Configuración inicial — primer arranque</h3>
+          <p>La primera vez que ejecutes <code>claude</code>, el asistente te hace estas preguntas:</p>
+          <div class="info-box" style="flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">1️⃣</span><span><strong>Selección de tema</strong> — Dark o Light. Usá las flechas y Enter para confirmar.</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><strong>API Key</strong> — Si no seteaste la variable de entorno, podés ingresarla acá directamente.</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">3️⃣</span><span><strong>Términos de uso</strong> — Respondé <code>yes</code> para continuar.</span></div>
+          </div>
+          <h3>Verificar versión</h3>
+          <CodeBlock code="claude --version" lang="bash" />
+          <h3>Comando rápido (modo no interactivo)</h3>
+          <CodeBlock code={`claude -p "¿Qué archivos hay en este directorio?"`} lang="bash" />
+          <div class="success-box"><span>🎉</span><span>Si Claude responde correctamente, ¡la instalación está completa!</span></div>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>Everything is set! Run Claude Code for the first time and go through initial setup.</p>
+          <h3>Open the interactive REPL</h3>
+          <CodeBlock code="claude" lang="bash" />
+          <h3>Initial setup — first launch</h3>
+          <p>The first time you run <code>claude</code>, it asks you:</p>
+          <div class="info-box" style="flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">1️⃣</span><span><strong>Theme selection</strong> — Dark or Light. Use arrow keys and Enter to confirm.</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><strong>API Key</strong> — If you didn't set the environment variable, you can enter it here.</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">3️⃣</span><span><strong>Terms of service</strong> — Type <code>yes</code> to continue.</span></div>
+          </div>
+          <h3>Verify version</h3>
+          <CodeBlock code="claude --version" lang="bash" />
+          <h3>Quick command (non-interactive)</h3>
+          <CodeBlock code={`claude -p "What files are in this directory?"`} lang="bash" />
+          <div class="success-box"><span>🎉</span><span>If Claude responds correctly, your installation is complete!</span></div>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>Tudo pronto! Execute o Claude Code pela primeira vez e configure a instalação inicial.</p>
+          <h3>Abrir o REPL interativo</h3>
+          <CodeBlock code="claude" lang="bash" />
+          <h3>Configuração inicial — primeira execução</h3>
+          <p>Na primeira vez que executar <code>claude</code>, o assistente pergunta:</p>
+          <div class="info-box" style="flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">1️⃣</span><span><strong>Seleção de tema</strong> — Dark ou Light. Use as setas e Enter para confirmar.</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><strong>API Key</strong> — Se não configurou a variável de ambiente, pode inserir aqui diretamente.</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">3️⃣</span><span><strong>Termos de uso</strong> — Digite <code>yes</code> para continuar.</span></div>
+          </div>
+          <h3>Verificar versão</h3>
+          <CodeBlock code="claude --version" lang="bash" />
+          <h3>Comando rápido (não interativo)</h3>
+          <CodeBlock code={`claude -p "Quais arquivos estão neste diretório?"`} lang="bash" />
+          <div class="success-box"><span>🎉</span><span>Se o Claude responder corretamente, a instalação está completa!</span></div>
+        </div>
+      </StepCard>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 5: ESSENTIAL CONFIG                                        -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={5} title="Configuración esencial" icon="⚙️">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>Claude Code se personaliza con archivos de configuración que le dan contexto sobre tus proyectos.</p>
+          <h3>CLAUDE.md — instrucciones de proyecto</h3>
+          <p>Creá un archivo <code>CLAUDE.md</code> en la raíz de tu proyecto. Claude lo lee automáticamente al iniciarse.</p>
+          <CodeBlock code={`# Mi Proyecto\n\n## Stack\n- Node.js + TypeScript\n- PostgreSQL\n\n## Convenciones\n- Tabs para indentación\n- Commits en inglés\n- Tests obligatorios para funciones públicas`} lang="markdown" label="CLAUDE.md" />
+          <h3>settings.json — configuración global</h3>
+          <div class="os-content" data-os="windows"><CodeBlock code={`%USERPROFILE%\\.claude\\settings.json`} lang="text" os="windows" label="Ruta Windows" /></div>
+          <div class="os-content" data-os="macos"><CodeBlock code={`~/.claude/settings.json`} lang="bash" os="macos" label="Ruta macOS/Linux" /></div>
+          <div class="os-content" data-os="linux"><CodeBlock code={`~/.claude/settings.json`} lang="bash" os="linux" label="Ruta macOS/Linux" /></div>
+          <CodeBlock code={`{\n  "model": "claude-opus-4-6",\n  "permissions": {\n    "allow": [\n      "Bash(git:*)", "Bash(npm:*)",\n      "Read(**)", "Write(**)", "Edit(**)",\n      "Glob(**)", "Grep(**)",\n      "WebSearch(**)", "WebFetch(**)"\n    ]\n  }\n}`} lang="json" label="settings.json" />
+          <h3>Sistema de memoria</h3>
+          <div class="info-box"><span>💡</span><span>En el REPL podés decirle: <em>"Recordá que prefiero TypeScript"</em> y lo persiste en <code>~/.claude/memory/</code> para futuras sesiones.</span></div>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>Claude Code is customized with configuration files that give it context about your projects.</p>
+          <h3>CLAUDE.md — project instructions</h3>
+          <p>Create a <code>CLAUDE.md</code> file at your project root. Claude reads it automatically on startup.</p>
+          <CodeBlock code={`# My Project\n\n## Stack\n- Node.js + TypeScript\n- PostgreSQL\n\n## Conventions\n- Tabs for indentation\n- Commits in English\n- Tests required for public functions`} lang="markdown" label="CLAUDE.md" />
+          <h3>settings.json — global config</h3>
+          <div class="os-content" data-os="windows"><CodeBlock code={`%USERPROFILE%\\.claude\\settings.json`} lang="text" os="windows" label="Windows path" /></div>
+          <div class="os-content" data-os="macos"><CodeBlock code={`~/.claude/settings.json`} lang="bash" os="macos" label="macOS/Linux path" /></div>
+          <div class="os-content" data-os="linux"><CodeBlock code={`~/.claude/settings.json`} lang="bash" os="linux" label="macOS/Linux path" /></div>
+          <CodeBlock code={`{\n  "model": "claude-opus-4-6",\n  "permissions": {\n    "allow": [\n      "Bash(git:*)", "Bash(npm:*)",\n      "Read(**)", "Write(**)", "Edit(**)",\n      "Glob(**)", "Grep(**)",\n      "WebSearch(**)", "WebFetch(**)"\n    ]\n  }\n}`} lang="json" label="settings.json" />
+          <h3>Memory system</h3>
+          <div class="info-box"><span>💡</span><span>In the REPL you can say: <em>"Remember I prefer TypeScript"</em> and it persists in <code>~/.claude/memory/</code> for future sessions.</span></div>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>O Claude Code é personalizado com arquivos de configuração que fornecem contexto sobre seus projetos.</p>
+          <h3>CLAUDE.md — instruções do projeto</h3>
+          <p>Crie um arquivo <code>CLAUDE.md</code> na raiz do seu projeto. O Claude lê automaticamente ao iniciar.</p>
+          <CodeBlock code={`# Meu Projeto\n\n## Stack\n- Node.js + TypeScript\n- PostgreSQL\n\n## Convenções\n- Tabs para indentação\n- Commits em inglês\n- Testes obrigatórios para funções públicas`} lang="markdown" label="CLAUDE.md" />
+          <h3>settings.json — configuração global</h3>
+          <div class="os-content" data-os="windows"><CodeBlock code={`%USERPROFILE%\\.claude\\settings.json`} lang="text" os="windows" label="Caminho Windows" /></div>
+          <div class="os-content" data-os="macos"><CodeBlock code={`~/.claude/settings.json`} lang="bash" os="macos" label="Caminho macOS/Linux" /></div>
+          <div class="os-content" data-os="linux"><CodeBlock code={`~/.claude/settings.json`} lang="bash" os="linux" label="Caminho macOS/Linux" /></div>
+          <CodeBlock code={`{\n  "model": "claude-opus-4-6",\n  "permissions": {\n    "allow": [\n      "Bash(git:*)", "Bash(npm:*)",\n      "Read(**)", "Write(**)", "Edit(**)",\n      "Glob(**)", "Grep(**)",\n      "WebSearch(**)", "WebFetch(**)"\n    ]\n  }\n}`} lang="json" label="settings.json" />
+          <h3>Sistema de memória</h3>
+          <div class="info-box"><span>💡</span><span>No REPL você pode dizer: <em>"Lembre que prefiro TypeScript"</em> e isso é persistido em <code>~/.claude/memory/</code> para sessões futuras.</span></div>
+        </div>
+      </StepCard>
+
+      <!-- AD UNIT 2 -->
+      <AdUnit slot="0987654321" />
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 6: SHORTCUTS & TIPS                                        -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={6} title="Shortcuts & Tips" icon="💡">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>Dominá Claude Code con estos atajos y comandos esenciales.</p>
+          <h3>Atajos de teclado</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Atajo</th><th>Acción</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">Esc</kbd> / <kbd class="key">Ctrl+C</kbd></td><td>Cancelar operación en curso</td></tr>
+              <tr><td><kbd class="key">↑</kbd> / <kbd class="key">↓</kbd></td><td>Navegar historial de prompts</td></tr>
+              <tr><td><kbd class="key">Shift+Enter</kbd></td><td>Nueva línea en el prompt</td></tr>
+              <tr><td><kbd class="key">Tab</kbd></td><td>Autocompletar comandos slash</td></tr>
+            </tbody>
+          </table>
+          <h3>Comandos slash</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">/help</kbd></td><td>Mostrar todos los comandos disponibles</td></tr>
+              <tr><td><kbd class="key">/compact</kbd></td><td>Compactar historial (ahorra tokens)</td></tr>
+              <tr><td><kbd class="key">/clear</kbd></td><td>Limpiar la conversación</td></tr>
+              <tr><td><kbd class="key">/model</kbd></td><td>Cambiar el modelo de IA</td></tr>
+              <tr><td><kbd class="key">/status</kbd></td><td>Ver estado de sesión y tokens</td></tr>
+              <tr><td><kbd class="key">/memory</kbd></td><td>Ver la memoria persistente</td></tr>
+              <tr><td><kbd class="key">/init</kbd></td><td>Inicializar CLAUDE.md en el proyecto</td></tr>
+            </tbody>
+          </table>
+          <h3>Tips de productividad</h3>
+          <ul>
+            <li>Usá <code>claude -p "prompt"</code> para ejecutar sin abrir el REPL.</li>
+            <li>Usá <code>/compact</code> cuando la conversación se vuelva muy larga.</li>
+            <li>Creá <code>~/.claude/CLAUDE.md</code> para instrucciones globales en todos tus proyectos.</li>
+            <li>El modo <code>/fast</code> usa el mismo Opus con output más veloz.</li>
+          </ul>
+          <h3>Modelos disponibles</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Modelo</th><th>Mejor para</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">claude-opus-4-6</kbd></td><td>Tareas complejas, arquitectura, refactors</td></tr>
+              <tr><td><kbd class="key">claude-sonnet-4-6</kbd></td><td>Balance capacidad/velocidad (default)</td></tr>
+              <tr><td><kbd class="key">claude-haiku-4-5</kbd></td><td>Tareas simples, respuestas rápidas</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>Master Claude Code with these essential shortcuts and commands.</p>
+          <h3>Keyboard shortcuts</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">Esc</kbd> / <kbd class="key">Ctrl+C</kbd></td><td>Cancel current operation</td></tr>
+              <tr><td><kbd class="key">↑</kbd> / <kbd class="key">↓</kbd></td><td>Navigate prompt history</td></tr>
+              <tr><td><kbd class="key">Shift+Enter</kbd></td><td>New line in prompt</td></tr>
+              <tr><td><kbd class="key">Tab</kbd></td><td>Autocomplete slash commands</td></tr>
+            </tbody>
+          </table>
+          <h3>Slash commands</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Command</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">/help</kbd></td><td>Show all available commands</td></tr>
+              <tr><td><kbd class="key">/compact</kbd></td><td>Compact conversation history (saves tokens)</td></tr>
+              <tr><td><kbd class="key">/clear</kbd></td><td>Clear the conversation</td></tr>
+              <tr><td><kbd class="key">/model</kbd></td><td>Switch AI model</td></tr>
+              <tr><td><kbd class="key">/status</kbd></td><td>View session status and token usage</td></tr>
+              <tr><td><kbd class="key">/memory</kbd></td><td>View persistent memory</td></tr>
+              <tr><td><kbd class="key">/init</kbd></td><td>Initialize CLAUDE.md for current project</td></tr>
+            </tbody>
+          </table>
+          <h3>Productivity tips</h3>
+          <ul>
+            <li>Use <code>claude -p "prompt"</code> to run a quick command without opening the REPL.</li>
+            <li>Use <code>/compact</code> when the conversation gets too long.</li>
+            <li>Create <code>~/.claude/CLAUDE.md</code> for global instructions across all projects.</li>
+            <li><code>/fast</code> mode uses the same Opus model with faster output.</li>
+          </ul>
+          <h3>Available models</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Model</th><th>Best for</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">claude-opus-4-6</kbd></td><td>Complex tasks, architecture, large refactors</td></tr>
+              <tr><td><kbd class="key">claude-sonnet-4-6</kbd></td><td>Balance of capability and speed (default)</td></tr>
+              <tr><td><kbd class="key">claude-haiku-4-5</kbd></td><td>Simple tasks, fast responses</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>Domine o Claude Code com estes atalhos e comandos essenciais.</p>
+          <h3>Atalhos de teclado</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Atalho</th><th>Ação</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">Esc</kbd> / <kbd class="key">Ctrl+C</kbd></td><td>Cancelar operação em andamento</td></tr>
+              <tr><td><kbd class="key">↑</kbd> / <kbd class="key">↓</kbd></td><td>Navegar histórico de prompts</td></tr>
+              <tr><td><kbd class="key">Shift+Enter</kbd></td><td>Nova linha no prompt</td></tr>
+              <tr><td><kbd class="key">Tab</kbd></td><td>Autocompletar comandos slash</td></tr>
+            </tbody>
+          </table>
+          <h3>Comandos slash</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Comando</th><th>Descrição</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">/help</kbd></td><td>Mostrar todos os comandos disponíveis</td></tr>
+              <tr><td><kbd class="key">/compact</kbd></td><td>Compactar histórico (economiza tokens)</td></tr>
+              <tr><td><kbd class="key">/clear</kbd></td><td>Limpar a conversa</td></tr>
+              <tr><td><kbd class="key">/model</kbd></td><td>Trocar o modelo de IA</td></tr>
+              <tr><td><kbd class="key">/status</kbd></td><td>Ver status da sessão e tokens</td></tr>
+              <tr><td><kbd class="key">/memory</kbd></td><td>Ver a memória persistente</td></tr>
+              <tr><td><kbd class="key">/init</kbd></td><td>Inicializar CLAUDE.md no projeto atual</td></tr>
+            </tbody>
+          </table>
+          <h3>Dicas de produtividade</h3>
+          <ul>
+            <li>Use <code>claude -p "prompt"</code> para executar sem abrir o REPL.</li>
+            <li>Use <code>/compact</code> quando a conversa ficar muito longa.</li>
+            <li>Crie <code>~/.claude/CLAUDE.md</code> para instruções globais em todos os seus projetos.</li>
+            <li>O modo <code>/fast</code> usa o mesmo Opus com saída mais rápida.</li>
+          </ul>
+          <h3>Modelos disponíveis</h3>
+          <table class="shortcuts-table">
+            <thead><tr><th>Modelo</th><th>Melhor para</th></tr></thead>
+            <tbody>
+              <tr><td><kbd class="key">claude-opus-4-6</kbd></td><td>Tarefas complexas, arquitetura, grandes refatorações</td></tr>
+              <tr><td><kbd class="key">claude-sonnet-4-6</kbd></td><td>Equilíbrio capacidade/velocidade (padrão)</td></tr>
+              <tr><td><kbd class="key">claude-haiku-4-5</kbd></td><td>Tarefas simples, respostas rápidas</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </StepCard>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 7: CELEBRATION                                             -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <Celebration />
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .page-header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .page-header-lang-mobile {
+    display: none;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .page-header-lang-mobile {
+      display: flex;
+    }
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+interface Props {
+  total: number;
+}
+
+const { total } = Astro.props;
+---
+
+<div class="mobile-progress" aria-label="Progreso móvil">
+  <div class="mobile-progress-header">
+    <div class="mobile-progress-title">
+      <span aria-hidden="true">✦</span>
+      <span>Claude Code — Guía de instalación</span>
+    </div>
+    <span class="mobile-progress-label progress-step-label">Paso 0 de {total}</span>
+  </div>
+  <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax={total} aria-valuenow="0">
+    <div class="progress-fill"></div>
+  </div>
+</div>

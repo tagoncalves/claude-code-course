@@ -1,0 +1,76 @@
+---
+import CafecitoButton from './CafecitoButton.astro';
+---
+
+<section class="step-card step-locked" id="step-7" data-step-id="7">
+  <div class="step-header">
+    <div class="step-number">7</div>
+    <h2><span aria-hidden="true">🎉</span> <span data-i18n="steps[7].title">¡Completado!</span></h2>
+    <div class="step-done-badge" aria-label="Completado">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+  </div>
+
+  <div class="step-body">
+    <div class="celebration-card">
+      <div style="font-size: 3.5rem; margin-bottom: 1rem;" aria-hidden="true">🚀</div>
+      <h3 class="celebration-title" data-i18n="celebrationTitle">¡Felicitaciones, developer!</h3>
+      <p class="celebration-subtitle" data-i18n="celebrationSubtitle">
+        Completaste la configuración de Claude Code. Ya tenés todo listo para potenciar
+        tu flujo de trabajo con IA directamente desde la terminal.
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <div style="background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.4); border-radius: 8px; padding: 0.75rem 1.25rem; font-size: 0.875rem; color: var(--accent-light);">
+          <span data-i18n="badge1">✦ Claude Code instalado</span>
+        </div>
+        <div style="background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); border-radius: 8px; padding: 0.75rem 1.25rem; font-size: 0.875rem; color: var(--success);">
+          <span data-i18n="badge2">✓ API Key configurada</span>
+        </div>
+        <div style="background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3); border-radius: 8px; padding: 0.75rem 1.25rem; font-size: 0.875rem; color: var(--cyan);">
+          <span data-i18n="badge3">⚡ Listo para usar</span>
+        </div>
+      </div>
+
+      <div class="resources-grid">
+        <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <span class="resource-card-icon">📖</span>
+          <span class="resource-card-title" data-i18n="resourcesOfficialDocs">Documentación oficial</span>
+          <span class="resource-card-desc" data-i18n="resourcesOfficialDocsDesc">Referencia completa de Claude Code</span>
+        </a>
+        <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <span class="resource-card-icon">⭐</span>
+          <span class="resource-card-title" data-i18n="resourcesGitHub">GitHub</span>
+          <span class="resource-card-desc" data-i18n="resourcesGitHubDesc">Código fuente y issues</span>
+        </a>
+        <a href="https://console.anthropic.com" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <span class="resource-card-icon">🔑</span>
+          <span class="resource-card-title" data-i18n="resourcesConsole">Anthropic Console</span>
+          <span class="resource-card-desc" data-i18n="resourcesConsoleDesc">Gestionar API keys y uso</span>
+        </a>
+        <a href="https://www.anthropic.com/changelog" target="_blank" rel="noopener noreferrer" class="resource-card">
+          <span class="resource-card-icon">📋</span>
+          <span class="resource-card-title" data-i18n="resourcesChangelog">Changelog</span>
+          <span class="resource-card-desc" data-i18n="resourcesChangelogDesc">Novedades y actualizaciones</span>
+        </a>
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <div style="margin-bottom: 1.5rem;">
+          <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem;" data-i18n="cafecitoText">
+            Si esta guía te ayudó, podés invitarme un café ☕
+          </p>
+          <CafecitoButton size="md" />
+        </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem;" data-i18n="resetQuestion">
+          ¿Querés empezar de nuevo?
+        </p>
+        <button id="reset-progress" class="btn-secondary" data-i18n="resetBtn">
+          ↩ Reiniciar progreso
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

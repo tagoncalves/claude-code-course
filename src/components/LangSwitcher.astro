@@ -1,0 +1,44 @@
+---
+// Language switcher pills: ES | EN | PT
+---
+
+<div class="lang-switcher" role="group" aria-label="Idioma / Language / Idioma">
+  <button class="lang-pill" data-lang="es" aria-pressed="false" title="Español">ES</button>
+  <button class="lang-pill" data-lang="en" aria-pressed="false" title="English">EN</button>
+  <button class="lang-pill" data-lang="pt" aria-pressed="false" title="Português">PT</button>
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: 3px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3px;
+  }
+
+  .lang-pill {
+    padding: 0.3rem 0.65rem;
+    border-radius: 5px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .lang-pill:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+
+  .lang-pill.active {
+    background: var(--accent);
+    color: white;
+  }
+</style>

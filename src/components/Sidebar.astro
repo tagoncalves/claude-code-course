@@ -1,0 +1,88 @@
+---
+import CafecitoButton from './CafecitoButton.astro';
+import LangSwitcher from './LangSwitcher.astro';
+
+interface Step {
+  id: number;
+  title: string;
+  icon: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<aside class="sidebar" aria-label="Progreso de instalación">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon" aria-hidden="true">✦</div>
+    <div>
+      <div class="sidebar-logo-text">Claude Code</div>
+      <div class="sidebar-logo-sub" data-i18n="sidebarSubtitle">Guía de instalación</div>
+    </div>
+  </div>
+
+  <div class="sidebar-lang">
+    <LangSwitcher />
+  </div>
+
+  <ul class="sidebar-steps" role="navigation" aria-label="Pasos">
+    {steps.map((step) => (
+      <li
+        class="sidebar-step locked"
+        data-step-id={step.id}
+        role="button"
+        tabindex="0"
+        aria-label={`Paso ${step.id}: ${step.title}`}
+      >
+        <div class="sidebar-step-dot" aria-hidden="true"></div>
+        <span class="sidebar-step-label">
+          <span aria-hidden="true">{step.icon}</span> {step.title}
+        </span>
+        <span class="sidebar-step-check" aria-hidden="true">✓</span>
+      </li>
+    ))}
+  </ul>
+
+  <div class="sidebar-progress">
+    <div class="sidebar-progress-label">
+      <span data-i18n="sidebarProgress">Progreso</span>
+      <span class="progress-label">0 / {steps.length}</span>
+    </div>
+    <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax={steps.length} aria-valuenow="0">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="sidebar-cafecito">
+    <p class="sidebar-cafecito-text" data-i18n="sidebarCafecito">¿Te fue útil esta guía?</p>
+    <CafecitoButton size="sm" />
+  </div>
+</aside>
+
+<style>
+  .sidebar-lang {
+    padding: 0.75rem 1rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+  }
+
+  .sidebar-cafecito {
+    padding: 1rem 1.5rem 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .sidebar-cafecito-text {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 0;
+  }
+</style>

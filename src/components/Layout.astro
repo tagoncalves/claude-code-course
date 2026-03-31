@@ -1,0 +1,67 @@
+---
+import { translations } from '../i18n/translations.js';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Claude Code — Guía de Instalación',
+  description = 'Guía interactiva paso a paso para instalar, configurar y usar Claude Code de Anthropic.',
+} = Astro.props;
+
+const translationsJson = JSON.stringify(translations);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXXX with your Publisher ID -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- Inject translations for i18n runtime -->
+    <script is:inline define:vars={{ translationsJson }}>
+      window.__TRANSLATIONS__ = JSON.parse(translationsJson);
+    </script>
+
+    <!-- Anti-FOUC: set active OS and language before first paint -->
+    <script is:inline>
+      (function () {
+        var saved = null;
+        try {
+          var raw = localStorage.getItem('claude-guide-progress');
+          if (raw) { var p = JSON.parse(raw); saved = { os: p.activeOs, lang: p.lang }; }
+        } catch (e) {}
+
+        // OS
+        var ua = navigator.userAgent;
+        var os = (saved && saved.os) || (ua.includes('Win') ? 'windows' : ua.includes('Mac') ? 'macos' : 'linux');
+        document.documentElement.dataset.activeOs = os;
+
+        // Language
+        var nav = (navigator.language || '').toLowerCase().slice(0, 2);
+        var detectedLang = nav === 'en' ? 'en' : nav === 'pt' ? 'pt' : 'es';
+        var lang = (saved && saved.lang) || detectedLang;
+        document.documentElement.dataset.lang = lang;
+        document.documentElement.lang = lang;
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <div id="confetti-container"></div>
+    <script>
+      import '../scripts/i18n.js';
+      import '../scripts/progress.js';
+    </script>
+  </body>
+</html>
