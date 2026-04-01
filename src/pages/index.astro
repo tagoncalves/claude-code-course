@@ -268,8 +268,7 @@ const steps = [
           <p>Para que el comando <code>claude</code> esté disponible en cualquier terminal, el directorio del binario debe estar en tu <strong>PATH</strong>.</p>
           <div class="os-content" data-os="windows">
             <h3>Si usaste el instalador oficial</h3>
-            <p>El instalador actualiza el PATH automáticamente. Verificá abriendo una <strong>nueva terminal</strong>:</p>
-            <CodeBlock code="claude --version" lang="powershell" os="windows" />
+            <p>El instalador actualiza el PATH automáticamente. Abrí una <strong>nueva terminal</strong> y si el comando <code>claude</code> responde, el PATH ya está listo — podés pasar al siguiente paso.</p>
             <p>Si no funciona, agregá manualmente <code>%USERPROFILE%\.local\bin</code> al PATH:</p>
             <h3>Opción 1 — PowerShell</h3>
             <CodeBlock code={`$path = "$env:USERPROFILE\\.local\\bin"\n[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$path", [EnvironmentVariableTarget]::User)\nWrite-Host "PATH actualizado. Reiniciá la terminal."`} lang="powershell" os="windows" label="PowerShell" />
@@ -305,8 +304,7 @@ const steps = [
           <p>For the <code>claude</code> command to work in any terminal, its directory must be in your <strong>PATH</strong>.</p>
           <div class="os-content" data-os="windows">
             <h3>If you used the official installer</h3>
-            <p>The installer updates PATH automatically. Verify by opening a <strong>new terminal</strong>:</p>
-            <CodeBlock code="claude --version" lang="powershell" os="windows" />
+            <p>The installer updates PATH automatically. Open a <strong>new terminal</strong> and if the <code>claude</code> command responds, your PATH is already set — move on to the next step.</p>
             <p>If it fails, manually add <code>%USERPROFILE%\.local\bin</code> to PATH:</p>
             <h3>Option 1 — PowerShell</h3>
             <CodeBlock code={`$path = "$env:USERPROFILE\\.local\\bin"\n[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$path", [EnvironmentVariableTarget]::User)\nWrite-Host "PATH updated. Restart your terminal."`} lang="powershell" os="windows" label="PowerShell" />
@@ -342,8 +340,7 @@ const steps = [
           <p>Para que o comando <code>claude</code> funcione em qualquer terminal, o diretório do binário deve estar no seu <strong>PATH</strong>.</p>
           <div class="os-content" data-os="windows">
             <h3>Se usou o instalador oficial</h3>
-            <p>O instalador atualiza o PATH automaticamente. Verifique abrindo um <strong>novo terminal</strong>:</p>
-            <CodeBlock code="claude --version" lang="powershell" os="windows" />
+            <p>O instalador atualiza o PATH automaticamente. Abra um <strong>novo terminal</strong> e se o comando <code>claude</code> responder, o PATH já está configurado — pode ir para o próximo passo.</p>
             <p>Se falhar, adicione manualmente <code>%USERPROFILE%\.local\bin</code> ao PATH:</p>
             <h3>Opção 1 — PowerShell</h3>
             <CodeBlock code={`$path = "$env:USERPROFILE\\.local\\bin"\n[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$path", [EnvironmentVariableTarget]::User)\nWrite-Host "PATH atualizado. Reinicie o terminal."`} lang="powershell" os="windows" label="PowerShell" />
