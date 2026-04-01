@@ -96,6 +96,14 @@ function resetAll() {
 }
 
 // ─── DOM Updates ─────────────────────────────────────────────────────────────
+function renderCelebrationState() {
+  const card = document.querySelector('.step-card[data-step-id="8"]');
+  if (!card) return;
+  const allDone = state.completedSteps.length >= TOTAL_STEPS;
+  card.classList.toggle('step-locked', !allDone);
+  card.classList.toggle('step-active', allDone);
+}
+
 function renderAllStepStates() {
   for (let i = 0; i < TOTAL_STEPS; i++) {
     const card = document.querySelector(`.step-card[data-step-id="${i}"]`);
@@ -110,6 +118,7 @@ function renderAllStepStates() {
   }
   updateProgressBar();
   updateSidebar();
+  renderCelebrationState();
 }
 
 function updateProgressBar() {
