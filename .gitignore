@@ -4,3 +4,10 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Claude Code local config (no subir al repo)
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db

@@ -39,7 +39,6 @@ export const translations = {
       { title: 'Primera verificación', icon: '🚀' },
       { title: 'Configuración esencial', icon: '⚙️' },
       { title: 'Shortcuts & Tips', icon: '💡' },
-      { title: '¡Completado!', icon: '🎉' },
     ],
 
     // Step card UI
@@ -109,7 +108,6 @@ export const translations = {
       { title: 'First Verification', icon: '🚀' },
       { title: 'Essential Config', icon: '⚙️' },
       { title: 'Shortcuts & Tips', icon: '💡' },
-      { title: 'Complete!', icon: '🎉' },
     ],
 
     // Step card UI
@@ -179,7 +177,6 @@ export const translations = {
       { title: 'Primeira Verificação', icon: '🚀' },
       { title: 'Config Essencial', icon: '⚙️' },
       { title: 'Atalhos & Dicas', icon: '💡' },
-      { title: 'Concluído!', icon: '🎉' },
     ],
 
     // Step card UI

@@ -85,24 +85,6 @@ function updateTranslatableStrings(lang) {
       label.textContent = t.copy || 'Copy';
     }
   });
-
-  // Update mark-done buttons (only undone steps)
-  document.querySelectorAll('.mark-done-btn').forEach((btn) => {
-    const card = btn.closest('.step-card');
-    if (card && !card.classList.contains('step-done')) {
-      btn.querySelector('span') ? null : null;
-      // Replace text node (keep the SVG icon)
-      const textNode = Array.from(btn.childNodes).find(n => n.nodeType === 3);
-      if (textNode) textNode.textContent = ' ' + (t.markDone || 'Mark as complete');
-    }
-  });
-
-  // Update progress labels
-  const progressLabel = document.querySelector('.progress-label');
-  // Numeric label stays as-is (updated by progress.js)
-
-  const stepLabel = document.querySelector('.progress-step-label');
-  // Numeric label stays as-is
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────

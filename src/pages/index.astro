@@ -10,7 +10,7 @@ import AdUnit from '../components/AdUnit.astro';
 import LangSwitcher from '../components/LangSwitcher.astro';
 import '../styles/global.css';
 
-// Default steps used for sidebar — JS updates labels on lang switch
+// Steps 0–6 only — step 7 is the celebration screen, not a trackable step
 const steps = [
   { id: 0, title: 'Prerequisitos', icon: '✅' },
   { id: 1, title: 'Instalar Claude Code', icon: '📦' },
@@ -19,7 +19,6 @@ const steps = [
   { id: 4, title: 'Primera verificación', icon: '🚀' },
   { id: 5, title: 'Configuración esencial', icon: '⚙️' },
   { id: 6, title: 'Shortcuts & Tips', icon: '💡' },
-  { id: 7, title: '¡Completado!', icon: '🎉' },
 ];
 ---
 
