@@ -149,7 +149,7 @@ const steps = [
             <h3>Paso previo — habilitar scripts en PowerShell</h3>
             <p>Por defecto Windows bloquea la ejecución de scripts <code>.ps1</code>. Habilitá los scripts para tu usuario:</p>
             <CodeBlock code={`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`} lang="powershell" os="windows" label="PowerShell" />
-            <div class="info-box"><span>💡</span><span>Esto solo afecta tu usuario, no el sistema. Es el ajuste recomendado para desarrollo.</span></div>
+            <div class="info-box"><span>💡</span><span>PowerShell va a pedir confirmación. Ingresá <strong>S</strong> (sistema en español) o <strong>Y</strong> (sistema en inglés) y Enter para confirmar.</span></div>
             <h3>Instalar Claude Code</h3>
             <p>Ahora ejecutá el instalador oficial:</p>
             <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — instalador oficial" />
@@ -187,7 +187,7 @@ const steps = [
             <h3>First — enable PowerShell scripts</h3>
             <p>Windows blocks <code>.ps1</code> scripts by default. Enable them for your user:</p>
             <CodeBlock code={`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`} lang="powershell" os="windows" label="PowerShell" />
-            <div class="info-box"><span>💡</span><span>This only affects your user, not the system. It's the recommended setting for development.</span></div>
+            <div class="info-box"><span>💡</span><span>PowerShell will prompt for confirmation. Type <strong>Y</strong> and Enter to confirm.</span></div>
             <h3>Install Claude Code</h3>
             <p>Now run the official installer:</p>
             <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — official installer" />
@@ -225,7 +225,7 @@ const steps = [
             <h3>Primeiro — habilitar scripts no PowerShell</h3>
             <p>O Windows bloqueia scripts <code>.ps1</code> por padrão. Habilite para o seu usuário:</p>
             <CodeBlock code={`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`} lang="powershell" os="windows" label="PowerShell" />
-            <div class="info-box"><span>💡</span><span>Isso afeta apenas o seu usuário, não o sistema. É o ajuste recomendado para desenvolvimento.</span></div>
+            <div class="info-box"><span>💡</span><span>O PowerShell vai pedir confirmação. Digite <strong>S</strong> (sistema em português) ou <strong>Y</strong> (sistema em inglês) e Enter para confirmar.</span></div>
             <h3>Instalar Claude Code</h3>
             <p>Agora execute o instalador oficial:</p>
             <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — instalador oficial" />
