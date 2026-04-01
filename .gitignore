@@ -1,12 +1,14 @@
 node_modules/
 dist/
 .astro/
+package-lock.json
+
 .env
 .env.*
 !.env.example
 
-# Claude Code local config (no subir al repo)
-.claude/settings.local.json
+# Claude Code local config
+.claude/
 
 # OS
 .DS_Store
