@@ -240,8 +240,22 @@ html:not([data-lang="pt"]) .lang-block[data-lang="pt"] { display: none !importan
 }
 
 .step-card.step-locked {
-  opacity: 0.5;
-  pointer-events: none;
+  display: none;
+}
+
+@keyframes stepReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-card.step-reveal {
+  animation: stepReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .step-header {

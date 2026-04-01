@@ -68,17 +68,25 @@ function isStepDone(stepId) {
   return state.completedSteps.includes(stepId);
 }
 
+function revealCard(selector) {
+  const card = document.querySelector(selector);
+  if (!card) return;
+  card.classList.add('step-reveal');
+  card.addEventListener('animationend', () => card.classList.remove('step-reveal'), { once: true });
+}
+
 function markStepDone(stepId) {
   if (!isStepUnlocked(stepId)) return;
   if (isStepDone(stepId)) return;
   state.completedSteps.push(stepId);
   saveState();
-  renderAllStepStates();
+  renderAllStepStates(); // removes step-locked from next card before reveal
   if (stepId === TOTAL_STEPS - 1) {
-    // Last real step (7) done → scroll to celebration and trigger confetti
+    revealCard('.step-card[data-step-id="8"]');
     setTimeout(() => scrollToStep(8), 300);
     setTimeout(() => triggerCelebration(), 800);
   } else {
+    revealCard(`.step-card[data-step-id="${stepId + 1}"]`);
     setTimeout(() => scrollToStep(stepId + 1), 300);
   }
 }
