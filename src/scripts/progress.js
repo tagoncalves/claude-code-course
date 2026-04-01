@@ -1,6 +1,6 @@
 // ─── Constants ──────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'claude-guide-progress';
-const TOTAL_STEPS = 7; // steps 0–6 (step 7 is the celebration screen, not a trackable step)
+const TOTAL_STEPS = 8; // steps 0–7 (step 8 is the celebration screen, not a trackable step)
 
 // ─── State ───────────────────────────────────────────────────────────────────
 let state = loadState();
@@ -75,8 +75,8 @@ function markStepDone(stepId) {
   saveState();
   renderAllStepStates();
   if (stepId === TOTAL_STEPS - 1) {
-    // Last real step (6) done → scroll to celebration and trigger confetti
-    setTimeout(() => scrollToStep(7), 300);
+    // Last real step (7) done → scroll to celebration and trigger confetti
+    setTimeout(() => scrollToStep(8), 300);
     setTimeout(() => triggerCelebration(), 800);
   } else {
     setTimeout(() => scrollToStep(stepId + 1), 300);

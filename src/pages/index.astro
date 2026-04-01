@@ -10,7 +10,7 @@ import AdUnit from '../components/AdUnit.astro';
 import LangSwitcher from '../components/LangSwitcher.astro';
 import '../styles/global.css';
 
-// Steps 0–6 only — step 7 is the celebration screen, not a trackable step
+// Steps 0–7 — step 8 is the celebration screen, not a trackable step
 const steps = [
   { id: 0, title: 'Prerequisitos', icon: '✅' },
   { id: 1, title: 'Instalar Claude Code', icon: '📦' },
@@ -19,6 +19,7 @@ const steps = [
   { id: 4, title: 'Primera verificación', icon: '🚀' },
   { id: 5, title: 'Configuración esencial', icon: '⚙️' },
   { id: 6, title: 'Shortcuts & Tips', icon: '💡' },
+  { id: 7, title: 'Directivas & .gitignore', icon: '📁' },
 ];
 ---
 
@@ -145,75 +146,114 @@ const steps = [
         <!-- ── ESPAÑOL ── -->
         <div class="lang-block" data-lang="es">
           <div class="os-content" data-os="windows">
-            <p>En Windows, usá el <strong>instalador oficial</strong>. Abrí <strong>PowerShell</strong> y ejecutá:</p>
+            <h3>Paso previo — habilitar scripts en PowerShell</h3>
+            <p>Por defecto Windows bloquea la ejecución de scripts <code>.ps1</code>. Habilitá los scripts para tu usuario:</p>
+            <CodeBlock code={`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`} lang="powershell" os="windows" label="PowerShell" />
+            <div class="info-box"><span>💡</span><span>Esto solo afecta tu usuario, no el sistema. Es el ajuste recomendado para desarrollo.</span></div>
+            <h3>Instalar Claude Code</h3>
+            <p>Ahora ejecutá el instalador oficial:</p>
             <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — instalador oficial" />
-            <div class="info-box"><span>💡</span><span>El script instala <code>claude.exe</code> en <code>$HOME\.local\bin\</code> y actualiza el PATH automáticamente.</span></div>
+            <div class="info-box"><span>💡</span><span>El script descarga e instala <code>claude.exe</code> en <code>$HOME\.local\bin\</code> y actualiza el PATH automáticamente.</span></div>
             <p>Alternativa — via npm (requiere Node.js ≥18):</p>
             <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="powershell" os="windows" label="PowerShell — npm" />
           </div>
           <div class="os-content" data-os="macos">
-            <p>Instalá globalmente via <strong>npm</strong>:</p>
-            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" />
+            <p>Instalá globalmente via <strong>npm</strong> desde la Terminal:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" label="Terminal" />
             <div class="warning-box"><span>⚠️</span><span>Si recibís error de permisos, <strong>no uses sudo</strong>. Usá nvm o corregí los permisos de npm.</span></div>
           </div>
           <div class="os-content" data-os="linux">
-            <p>Instalá globalmente via <strong>npm</strong>:</p>
-            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" />
+            <p>Instalá globalmente via <strong>npm</strong> desde la terminal:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" label="Terminal" />
             <div class="warning-box"><span>⚠️</span><span>Si recibís error de permisos, <strong>no uses sudo</strong>. Usá nvm o configurá npm para instalar en tu home.</span></div>
           </div>
           <div class="info-box"><span>⏳</span><span>La instalación puede tardar unos segundos.</span></div>
           <h3>Verificar instalación</h3>
-          <CodeBlock code="claude --version" lang="bash" />
+          <div class="os-content" data-os="windows">
+            <CodeBlock code="claude --version" lang="powershell" os="windows" label="PowerShell" />
+          </div>
+          <div class="os-content" data-os="macos">
+            <CodeBlock code="claude --version" lang="bash" os="macos" label="Terminal" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <CodeBlock code="claude --version" lang="bash" os="linux" label="Terminal" />
+          </div>
           <p>Deberías ver algo como <code>claude/1.x.x</code>.</p>
         </div>
 
         <!-- ── ENGLISH ── -->
         <div class="lang-block" data-lang="en">
           <div class="os-content" data-os="windows">
-            <p>On Windows, use the <strong>official installer</strong>. Open <strong>PowerShell</strong> and run:</p>
+            <h3>First — enable PowerShell scripts</h3>
+            <p>Windows blocks <code>.ps1</code> scripts by default. Enable them for your user:</p>
+            <CodeBlock code={`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`} lang="powershell" os="windows" label="PowerShell" />
+            <div class="info-box"><span>💡</span><span>This only affects your user, not the system. It's the recommended setting for development.</span></div>
+            <h3>Install Claude Code</h3>
+            <p>Now run the official installer:</p>
             <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — official installer" />
-            <div class="info-box"><span>💡</span><span>The script installs <code>claude.exe</code> in <code>$HOME\.local\bin\</code> and updates PATH automatically.</span></div>
+            <div class="info-box"><span>💡</span><span>The script downloads and installs <code>claude.exe</code> in <code>$HOME\.local\bin\</code> and updates PATH automatically.</span></div>
             <p>Alternative — via npm (requires Node.js ≥18):</p>
             <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="powershell" os="windows" label="PowerShell — npm" />
           </div>
           <div class="os-content" data-os="macos">
-            <p>Install globally via <strong>npm</strong>:</p>
-            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" />
+            <p>Install globally via <strong>npm</strong> from Terminal:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" label="Terminal" />
             <div class="warning-box"><span>⚠️</span><span>If you get a permissions error, <strong>don't use sudo</strong>. Use nvm or fix npm permissions.</span></div>
           </div>
           <div class="os-content" data-os="linux">
-            <p>Install globally via <strong>npm</strong>:</p>
-            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" />
+            <p>Install globally via <strong>npm</strong> from the terminal:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" label="Terminal" />
             <div class="warning-box"><span>⚠️</span><span>If you get a permissions error, <strong>don't use sudo</strong>. Use nvm or configure npm to install in your home directory.</span></div>
           </div>
           <div class="info-box"><span>⏳</span><span>Installation may take a few seconds.</span></div>
           <h3>Verify installation</h3>
-          <CodeBlock code="claude --version" lang="bash" />
+          <div class="os-content" data-os="windows">
+            <CodeBlock code="claude --version" lang="powershell" os="windows" label="PowerShell" />
+          </div>
+          <div class="os-content" data-os="macos">
+            <CodeBlock code="claude --version" lang="bash" os="macos" label="Terminal" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <CodeBlock code="claude --version" lang="bash" os="linux" label="Terminal" />
+          </div>
           <p>You should see something like <code>claude/1.x.x</code>.</p>
         </div>
 
         <!-- ── PORTUGUÊS ── -->
         <div class="lang-block" data-lang="pt">
           <div class="os-content" data-os="windows">
-            <p>No Windows, use o <strong>instalador oficial</strong>. Abra o <strong>PowerShell</strong> e execute:</p>
+            <h3>Primeiro — habilitar scripts no PowerShell</h3>
+            <p>O Windows bloqueia scripts <code>.ps1</code> por padrão. Habilite para o seu usuário:</p>
+            <CodeBlock code={`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`} lang="powershell" os="windows" label="PowerShell" />
+            <div class="info-box"><span>💡</span><span>Isso afeta apenas o seu usuário, não o sistema. É o ajuste recomendado para desenvolvimento.</span></div>
+            <h3>Instalar Claude Code</h3>
+            <p>Agora execute o instalador oficial:</p>
             <CodeBlock code={`irm https://claude.ai/install.ps1 | iex`} lang="powershell" os="windows" label="PowerShell — instalador oficial" />
-            <div class="info-box"><span>💡</span><span>O script instala <code>claude.exe</code> em <code>$HOME\.local\bin\</code> e atualiza o PATH automaticamente.</span></div>
+            <div class="info-box"><span>💡</span><span>O script baixa e instala <code>claude.exe</code> em <code>$HOME\.local\bin\</code> e atualiza o PATH automaticamente.</span></div>
             <p>Alternativa — via npm (requer Node.js ≥18):</p>
             <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="powershell" os="windows" label="PowerShell — npm" />
           </div>
           <div class="os-content" data-os="macos">
-            <p>Instale globalmente via <strong>npm</strong>:</p>
-            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" />
+            <p>Instale globalmente via <strong>npm</strong> pelo Terminal:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="macos" label="Terminal" />
             <div class="warning-box"><span>⚠️</span><span>Se receber erro de permissão, <strong>não use sudo</strong>. Use nvm ou corrija as permissões do npm.</span></div>
           </div>
           <div class="os-content" data-os="linux">
-            <p>Instale globalmente via <strong>npm</strong>:</p>
-            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" />
+            <p>Instale globalmente via <strong>npm</strong> pelo terminal:</p>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" lang="bash" os="linux" label="Terminal" />
             <div class="warning-box"><span>⚠️</span><span>Se receber erro de permissão, <strong>não use sudo</strong>. Use nvm ou configure o npm para instalar no seu diretório home.</span></div>
           </div>
           <div class="info-box"><span>⏳</span><span>A instalação pode levar alguns segundos.</span></div>
           <h3>Verificar instalação</h3>
-          <CodeBlock code="claude --version" lang="bash" />
+          <div class="os-content" data-os="windows">
+            <CodeBlock code="claude --version" lang="powershell" os="windows" label="PowerShell" />
+          </div>
+          <div class="os-content" data-os="macos">
+            <CodeBlock code="claude --version" lang="bash" os="macos" label="Terminal" />
+          </div>
+          <div class="os-content" data-os="linux">
+            <CodeBlock code="claude --version" lang="bash" os="linux" label="Terminal" />
+          </div>
           <p>Você deve ver algo como <code>claude/1.x.x</code>.</p>
         </div>
       </StepCard>
@@ -439,9 +479,8 @@ const steps = [
             <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><strong>API Key</strong> — Si no seteaste la variable de entorno, podés ingresarla acá directamente.</span></div>
             <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">3️⃣</span><span><strong>Términos de uso</strong> — Respondé <code>yes</code> para continuar.</span></div>
           </div>
-          <h3>Verificar versión</h3>
-          <CodeBlock code="claude --version" lang="bash" />
           <h3>Comando rápido (modo no interactivo)</h3>
+          <p>También podés enviar un prompt directamente sin abrir el REPL:</p>
           <CodeBlock code={`claude -p "¿Qué archivos hay en este directorio?"`} lang="bash" />
           <div class="success-box"><span>🎉</span><span>Si Claude responde correctamente, ¡la instalación está completa!</span></div>
         </div>
@@ -458,9 +497,8 @@ const steps = [
             <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><strong>API Key</strong> — If you didn't set the environment variable, you can enter it here.</span></div>
             <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">3️⃣</span><span><strong>Terms of service</strong> — Type <code>yes</code> to continue.</span></div>
           </div>
-          <h3>Verify version</h3>
-          <CodeBlock code="claude --version" lang="bash" />
           <h3>Quick command (non-interactive)</h3>
+          <p>You can also send a prompt directly without opening the REPL:</p>
           <CodeBlock code={`claude -p "What files are in this directory?"`} lang="bash" />
           <div class="success-box"><span>🎉</span><span>If Claude responds correctly, your installation is complete!</span></div>
         </div>
@@ -477,9 +515,8 @@ const steps = [
             <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><strong>API Key</strong> — Se não configurou a variável de ambiente, pode inserir aqui diretamente.</span></div>
             <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">3️⃣</span><span><strong>Termos de uso</strong> — Digite <code>yes</code> para continuar.</span></div>
           </div>
-          <h3>Verificar versão</h3>
-          <CodeBlock code="claude --version" lang="bash" />
           <h3>Comando rápido (não interativo)</h3>
+          <p>Você também pode enviar um prompt diretamente sem abrir o REPL:</p>
           <CodeBlock code={`claude -p "Quais arquivos estão neste diretório?"`} lang="bash" />
           <div class="success-box"><span>🎉</span><span>Se o Claude responder corretamente, a instalação está completa!</span></div>
         </div>
@@ -492,7 +529,8 @@ const steps = [
 
         <!-- ── ESPAÑOL ── -->
         <div class="lang-block" data-lang="es">
-          <p>Claude Code se personaliza con archivos de configuración que le dan contexto sobre tus proyectos.</p>
+          <div class="info-box"><span>✨</span><span><strong>Buenas noticias:</strong> Claude Code se auto-configura al iniciarse por primera vez. No necesitás editar ningún archivo para empezar a usarlo. Lo que sigue es configuración avanzada opcional.</span></div>
+          <p>Para proyectos, podés darle contexto a Claude con estos archivos:</p>
           <h3>CLAUDE.md — instrucciones de proyecto</h3>
           <p>Creá un archivo <code>CLAUDE.md</code> en la raíz de tu proyecto. Claude lo lee automáticamente al iniciarse.</p>
           <CodeBlock code={`# Mi Proyecto\n\n## Stack\n- Node.js + TypeScript\n- PostgreSQL\n\n## Convenciones\n- Tabs para indentación\n- Commits en inglés\n- Tests obligatorios para funciones públicas`} lang="markdown" label="CLAUDE.md" />
@@ -507,7 +545,8 @@ const steps = [
 
         <!-- ── ENGLISH ── -->
         <div class="lang-block" data-lang="en">
-          <p>Claude Code is customized with configuration files that give it context about your projects.</p>
+          <div class="info-box"><span>✨</span><span><strong>Good news:</strong> Claude Code auto-configures on first launch. You don't need to edit any files to start using it. Everything below is optional advanced configuration.</span></div>
+          <p>To give Claude context about your projects, you can use these files:</p>
           <h3>CLAUDE.md — project instructions</h3>
           <p>Create a <code>CLAUDE.md</code> file at your project root. Claude reads it automatically on startup.</p>
           <CodeBlock code={`# My Project\n\n## Stack\n- Node.js + TypeScript\n- PostgreSQL\n\n## Conventions\n- Tabs for indentation\n- Commits in English\n- Tests required for public functions`} lang="markdown" label="CLAUDE.md" />
@@ -522,7 +561,8 @@ const steps = [
 
         <!-- ── PORTUGUÊS ── -->
         <div class="lang-block" data-lang="pt">
-          <p>O Claude Code é personalizado com arquivos de configuração que fornecem contexto sobre seus projetos.</p>
+          <div class="info-box"><span>✨</span><span><strong>Boa notícia:</strong> O Claude Code se auto-configura na primeira execução. Você não precisa editar nenhum arquivo para começar a usá-lo. O que segue é configuração avançada e opcional.</span></div>
+          <p>Para dar contexto ao Claude sobre seus projetos, você pode usar estes arquivos:</p>
           <h3>CLAUDE.md — instruções do projeto</h3>
           <p>Crie um arquivo <code>CLAUDE.md</code> na raiz do seu projeto. O Claude lê automaticamente ao iniciar.</p>
           <CodeBlock code={`# Meu Projeto\n\n## Stack\n- Node.js + TypeScript\n- PostgreSQL\n\n## Convenções\n- Tabs para indentação\n- Commits em inglês\n- Testes obrigatórios para funções públicas`} lang="markdown" label="CLAUDE.md" />
@@ -678,7 +718,91 @@ const steps = [
       </StepCard>
 
       <!-- ════════════════════════════════════════════════════════════════ -->
-      <!-- STEP 7: CELEBRATION                                             -->
+      <!-- STEP 7: DIRECTIVES & .GITIGNORE                                 -->
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <StepCard stepId={7} title="Directivas & .gitignore" icon="📁">
+
+        <!-- ── ESPAÑOL ── -->
+        <div class="lang-block" data-lang="es">
+          <p>Claude Code usa una jerarquía de archivos <code>CLAUDE.md</code> para instrucciones y una carpeta <code>.claude/</code> para datos de sesión y memoria.</p>
+
+          <h3>Jerarquía de CLAUDE.md</h3>
+          <p>Claude combina instrucciones de múltiples archivos. El orden de prioridad:</p>
+          <div class="info-box" style="flex-direction: column; gap: 0.5rem;">
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">1️⃣</span><span><code>~/.claude/CLAUDE.md</code> — instrucciones <strong>globales</strong>, aplican a todos tus proyectos</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><code>./CLAUDE.md</code> — instrucciones del <strong>proyecto actual</strong>, se sobreponen a las globales</span></div>
+          </div>
+          <p>Ejemplo de CLAUDE.md global:</p>
+          <CodeBlock code={`# Preferencias globales\n\n## Estilo de código\n- TypeScript siempre que sea posible\n- Commits en inglés, convención conventional commits\n- Tests con Vitest\n\n## Comportamiento\n- Siempre pedí confirmación antes de borrar archivos\n- Respondé en el idioma en que te hablo`} lang="markdown" label="~/.claude/CLAUDE.md" />
+
+          <h3>Estructura de la carpeta .claude/</h3>
+          <CodeBlock code={`.claude/\n├── settings.json          # Configuración global (modelo, permisos)\n├── settings.local.json    # Config local (no commitear)\n├── memory/                # Memorias persistentes entre sesiones\n│   ├── user_prefs.md\n│   └── project_context.md\n└── CLAUDE.md              # Instrucciones globales`} lang="text" label="Estructura ~/.claude/" />
+
+          <h3>Agregar .claude/ al .gitignore del proyecto</h3>
+          <p>La carpeta <code>.claude/</code> dentro de un proyecto puede contener datos sensibles o específicos de tu máquina. Agregala al <code>.gitignore</code>:</p>
+          <CodeBlock code={`# Claude Code\n.claude/`} lang="text" label=".gitignore" />
+          <div class="warning-box"><span>⚠️</span><span>Si querés compartir las instrucciones del proyecto, usá <code>CLAUDE.md</code> (en la raíz) — ese sí puede ir al repo. La carpeta <code>.claude/</code> no.</span></div>
+
+          <h3>settings.local.json — overrides locales</h3>
+          <p>Para configuraciones que no querés commitear (tokens, paths locales), usá <code>.claude/settings.local.json</code>. Este archivo tiene prioridad sobre <code>settings.json</code> y debe estar en el <code>.gitignore</code>.</p>
+          <div class="success-box"><span>✓</span><span>Con esta estructura mantenés las instrucciones del proyecto en el repo y tus configuraciones personales fuera de él.</span></div>
+        </div>
+
+        <!-- ── ENGLISH ── -->
+        <div class="lang-block" data-lang="en">
+          <p>Claude Code uses a hierarchy of <code>CLAUDE.md</code> files for instructions and a <code>.claude/</code> folder for session data and memory.</p>
+
+          <h3>CLAUDE.md hierarchy</h3>
+          <p>Claude combines instructions from multiple files. Priority order:</p>
+          <div class="info-box" style="flex-direction: column; gap: 0.5rem;">
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">1️⃣</span><span><code>~/.claude/CLAUDE.md</code> — <strong>global</strong> instructions, apply to all your projects</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><code>./CLAUDE.md</code> — <strong>project</strong> instructions, override global ones</span></div>
+          </div>
+          <p>Example global CLAUDE.md:</p>
+          <CodeBlock code={`# Global preferences\n\n## Code style\n- TypeScript whenever possible\n- Conventional commits\n- Tests with Vitest\n\n## Behavior\n- Always ask for confirmation before deleting files\n- Reply in the language I use`} lang="markdown" label="~/.claude/CLAUDE.md" />
+
+          <h3>.claude/ folder structure</h3>
+          <CodeBlock code={`.claude/\n├── settings.json          # Global config (model, permissions)\n├── settings.local.json    # Local config (don't commit)\n├── memory/                # Persistent memories across sessions\n│   ├── user_prefs.md\n│   └── project_context.md\n└── CLAUDE.md              # Global instructions`} lang="text" label="~/.claude/ structure" />
+
+          <h3>Add .claude/ to your project's .gitignore</h3>
+          <p>The <code>.claude/</code> folder inside a project can contain sensitive or machine-specific data. Add it to <code>.gitignore</code>:</p>
+          <CodeBlock code={`# Claude Code\n.claude/`} lang="text" label=".gitignore" />
+          <div class="warning-box"><span>⚠️</span><span>If you want to share project instructions, use <code>CLAUDE.md</code> (at the root) — that file belongs in the repo. The <code>.claude/</code> folder does not.</span></div>
+
+          <h3>settings.local.json — local overrides</h3>
+          <p>For settings you don't want to commit (tokens, local paths), use <code>.claude/settings.local.json</code>. This file takes priority over <code>settings.json</code> and should be in your <code>.gitignore</code>.</p>
+          <div class="success-box"><span>✓</span><span>With this structure, project instructions stay in the repo and your personal config stays out of it.</span></div>
+        </div>
+
+        <!-- ── PORTUGUÊS ── -->
+        <div class="lang-block" data-lang="pt">
+          <p>O Claude Code usa uma hierarquia de arquivos <code>CLAUDE.md</code> para instruções e uma pasta <code>.claude/</code> para dados de sessão e memória.</p>
+
+          <h3>Hierarquia do CLAUDE.md</h3>
+          <p>O Claude combina instruções de múltiplos arquivos. Ordem de prioridade:</p>
+          <div class="info-box" style="flex-direction: column; gap: 0.5rem;">
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">1️⃣</span><span><code>~/.claude/CLAUDE.md</code> — instruções <strong>globais</strong>, aplicadas a todos os seus projetos</span></div>
+            <div style="display: flex; gap: 0.75rem;"><span style="flex-shrink:0;">2️⃣</span><span><code>./CLAUDE.md</code> — instruções do <strong>projeto atual</strong>, sobrepõem as globais</span></div>
+          </div>
+          <p>Exemplo de CLAUDE.md global:</p>
+          <CodeBlock code={`# Preferências globais\n\n## Estilo de código\n- TypeScript sempre que possível\n- Conventional commits\n- Testes com Vitest\n\n## Comportamento\n- Sempre peça confirmação antes de deletar arquivos\n- Responda no idioma em que eu falo`} lang="markdown" label="~/.claude/CLAUDE.md" />
+
+          <h3>Estrutura da pasta .claude/</h3>
+          <CodeBlock code={`.claude/\n├── settings.json          # Configuração global (modelo, permissões)\n├── settings.local.json    # Config local (não commitar)\n├── memory/                # Memórias persistentes entre sessões\n│   ├── user_prefs.md\n│   └── project_context.md\n└── CLAUDE.md              # Instruções globais`} lang="text" label="Estrutura ~/.claude/" />
+
+          <h3>Adicionar .claude/ ao .gitignore do projeto</h3>
+          <p>A pasta <code>.claude/</code> dentro de um projeto pode conter dados sensíveis ou específicos da sua máquina. Adicione ao <code>.gitignore</code>:</p>
+          <CodeBlock code={`# Claude Code\n.claude/`} lang="text" label=".gitignore" />
+          <div class="warning-box"><span>⚠️</span><span>Se quiser compartilhar as instruções do projeto, use <code>CLAUDE.md</code> (na raiz) — esse arquivo pode ir ao repo. A pasta <code>.claude/</code> não.</span></div>
+
+          <h3>settings.local.json — overrides locais</h3>
+          <p>Para configurações que não quer commitar (tokens, caminhos locais), use <code>.claude/settings.local.json</code>. Esse arquivo tem prioridade sobre <code>settings.json</code> e deve estar no <code>.gitignore</code>.</p>
+          <div class="success-box"><span>✓</span><span>Com essa estrutura, as instruções do projeto ficam no repo e suas configurações pessoais ficam fora dele.</span></div>
+        </div>
+      </StepCard>
+
+      <!-- ════════════════════════════════════════════════════════════════ -->
+      <!-- STEP 8: CELEBRATION                                             -->
       <!-- ════════════════════════════════════════════════════════════════ -->
       <Celebration />
     </main>

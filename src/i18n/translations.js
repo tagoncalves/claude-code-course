@@ -39,6 +39,7 @@ export const translations = {
       { title: 'Primera verificación', icon: '🚀' },
       { title: 'Configuración esencial', icon: '⚙️' },
       { title: 'Shortcuts & Tips', icon: '💡' },
+      { title: 'Directivas & .gitignore', icon: '📁' },
     ],
 
     // Step card UI
@@ -67,6 +68,9 @@ export const translations = {
     cafecitoText: 'Si esta guía te ayudó, podés invitarme un café ☕',
     resetQuestion: '¿Querés empezar de nuevo?',
     resetBtn: '↩ Reiniciar progreso',
+
+    // Celebration step header
+    celebrationStepTitle: '¡Completado!',
 
     // Lang switcher
     langLabel: 'Idioma',
@@ -108,6 +112,7 @@ export const translations = {
       { title: 'First Verification', icon: '🚀' },
       { title: 'Essential Config', icon: '⚙️' },
       { title: 'Shortcuts & Tips', icon: '💡' },
+      { title: 'Directives & .gitignore', icon: '📁' },
     ],
 
     // Step card UI
@@ -136,6 +141,9 @@ export const translations = {
     cafecitoText: 'If this guide helped you, you can buy me a coffee ☕',
     resetQuestion: 'Want to start over?',
     resetBtn: '↩ Reset progress',
+
+    // Celebration step header
+    celebrationStepTitle: 'Completed!',
 
     // Lang switcher
     langLabel: 'Language',
@@ -177,6 +185,7 @@ export const translations = {
       { title: 'Primeira Verificação', icon: '🚀' },
       { title: 'Config Essencial', icon: '⚙️' },
       { title: 'Atalhos & Dicas', icon: '💡' },
+      { title: 'Diretivas & .gitignore', icon: '📁' },
     ],
 
     // Step card UI
@@ -205,6 +214,9 @@ export const translations = {
     cafecitoText: 'Se este guia ajudou você, pode me pagar um café ☕',
     resetQuestion: 'Quer começar de novo?',
     resetBtn: '↩ Reiniciar progresso',
+
+    // Celebration step header
+    celebrationStepTitle: 'Concluído!',
 
     // Lang switcher
     langLabel: 'Idioma',

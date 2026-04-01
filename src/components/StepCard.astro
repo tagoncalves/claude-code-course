@@ -10,7 +10,7 @@ const { stepId, title, icon = '' } = Astro.props;
 
 <section class="step-card step-locked" id={`step-${stepId}`} data-step-id={stepId}>
   <div class="step-header">
-    <div class="step-number">{stepId}</div>
+    <div class="step-number">{stepId + 1}</div>
     <h2>{icon && <span aria-hidden="true">{icon}</span>} {title}</h2>
     <div class="step-done-badge" aria-label="Completado">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">

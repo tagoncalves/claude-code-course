@@ -35,7 +35,7 @@ const { steps } = Astro.props;
         data-step-id={step.id}
         role="button"
         tabindex="0"
-        aria-label={`Paso ${step.id}: ${step.title}`}
+        aria-label={`Paso ${step.id + 1}: ${step.title}`}
       >
         <div class="sidebar-step-dot" aria-hidden="true"></div>
         <span class="sidebar-step-label">
