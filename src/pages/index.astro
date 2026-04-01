@@ -43,6 +43,24 @@ const steps = [
         </p>
       </header>
 
+      <div class="api-key-warning">
+        <span class="api-key-warning-icon">🔑</span>
+        <div>
+          <div class="lang-block" data-lang="es">
+            <strong>Requisito previo:</strong> para completar esta guía necesitás una <strong>API key de Anthropic</strong>.
+            Si no tenés una cuenta, <a href="https://console.anthropic.com" target="_blank" rel="noopener">registrate gratis en console.anthropic.com</a> antes de empezar.
+          </div>
+          <div class="lang-block" data-lang="en">
+            <strong>Prerequisite:</strong> to complete this guide you need an <strong>Anthropic API key</strong>.
+            If you don't have an account, <a href="https://console.anthropic.com" target="_blank" rel="noopener">sign up for free at console.anthropic.com</a> before you begin.
+          </div>
+          <div class="lang-block" data-lang="pt">
+            <strong>Pré-requisito:</strong> para concluir este guia você precisa de uma <strong>API key da Anthropic</strong>.
+            Se não tiver uma conta, <a href="https://console.anthropic.com" target="_blank" rel="noopener">cadastre-se gratuitamente em console.anthropic.com</a> antes de começar.
+          </div>
+        </div>
+      </div>
+
       <OSTabs />
 
       <!-- ════════════════════════════════════════════════════════════════ -->
@@ -807,6 +825,36 @@ const steps = [
 </Layout>
 
 <style>
+  .api-key-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .api-key-warning-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .api-key-warning a {
+    color: #f59e0b;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .api-key-warning a:hover {
+    color: #fbbf24;
+  }
+
   .page-header-top {
     display: flex;
     align-items: flex-start;
